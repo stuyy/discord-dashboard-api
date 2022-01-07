@@ -6,4 +6,5 @@ export interface IGuildsService {
     guildId: string,
     prefix: string,
   ): Promise<GuildConfiguration>;
+  updateWelcomeChannel(guildId: string, welcomeChannelId: string);
 }

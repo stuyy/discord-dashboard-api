@@ -28,4 +28,8 @@ export class DiscordService implements IDiscordService {
     );
     return mutualGuilds;
   }
+
+  getGuildChannels(guildId: string) {
+    return this.discordHttpService.fetchGuildChannels(guildId);
+  }
 }

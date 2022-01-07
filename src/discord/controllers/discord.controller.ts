@@ -1,4 +1,4 @@
-import { Controller, Get, Inject } from '@nestjs/common';
+import { Controller, Get, Inject, Param } from '@nestjs/common';
 import { ROUTES, SERVICES } from '../../utils/constants';
 import { AuthUser } from '../../utils/decorators';
 import { User } from '../../utils/typeorm/entities/User';
@@ -13,5 +13,11 @@ export class DiscordController {
   @Get('guilds')
   getMutualGuilds(@AuthUser() user: User) {
     return this.discordService.getMutualGuilds(user.accessToken);
+  }
+
+  @Get('guilds/:guildId/channels')
+  async getGuildChannels(@Param('guildId') guildId: string) {
+    const { data } = await this.discordService.getGuildChannels(guildId);
+    return data.filter((channel) => channel.type === 0);
   }
 }

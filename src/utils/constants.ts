@@ -11,3 +11,5 @@ export enum SERVICES {
   DISCORD_HTTP = 'DISCORD_HTTP_SERVICE',
   GUILDS = 'GUILDS_SERVICE',
 }
+
+export const DISCORD_BASE_URL = 'https://discord.com/api/v9';

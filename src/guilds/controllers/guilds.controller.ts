@@ -36,4 +36,12 @@ export class GuildsController {
   ) {
     return this.guildsService.updateGuildPrefix(guildId, prefix);
   }
+
+  @Post(':guildId/config/welcome')
+  async updateWelcomeChannel(
+    @Param('guildId') guildId: string,
+    @Body('channelId') channelId: string,
+  ) {
+    return this.guildsService.updateWelcomeChannel(guildId, channelId);
+  }
 }
