@@ -7,6 +7,7 @@ import {
   Inject,
   Param,
   Post,
+  Query,
   ValidationPipe,
 } from '@nestjs/common';
 import { ROUTES, SERVICES } from '../../utils/constants';
@@ -47,5 +48,13 @@ export class GuildsController {
     @Body('channelId') channelId: string,
   ) {
     return this.guildsService.updateWelcomeChannel(guildId, channelId);
+  }
+
+  @Get(':guildId/bans')
+  async getGuildBans(
+    @Param('guildId') guildId: string,
+    @Query('fromDate') fromDate: Date,
+  ) {
+    return this.guildsService.getGuildBans(guildId, fromDate);
   }
 }
