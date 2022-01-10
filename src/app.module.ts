@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module';
 import { PassportModule } from '@nestjs/passport';
 import { DiscordModule } from './discord/discord.module';
 import { GuildsModule } from './guilds/guilds.module';
+import { WebSocketModule } from './websocket/websocket.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { GuildsModule } from './guilds/guilds.module';
     UserModule,
     DiscordModule,
     GuildsModule,
+    WebSocketModule,
   ],
   controllers: [],
   providers: [],

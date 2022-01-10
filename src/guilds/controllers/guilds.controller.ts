@@ -10,12 +10,14 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { ROUTES, SERVICES } from '../../utils/constants';
+import { WebsocketHandler } from '../../websocket/socket';
 import { IGuildsService } from '../interfaces/guilds';
 
 @Controller(ROUTES.GUILDS)
 export class GuildsController {
   constructor(
     @Inject(SERVICES.GUILDS) private readonly guildsService: IGuildsService,
+    @Inject(WebsocketHandler) private readonly wsHandler: WebsocketHandler,
   ) {}
 
   @Get('config/:guildId')
@@ -34,7 +36,9 @@ export class GuildsController {
     @Param('guildId') guildId: string,
     @Body('prefix') prefix: string,
   ) {
-    return this.guildsService.updateGuildPrefix(guildId, prefix);
+    const config = await this.guildsService.updateGuildPrefix(guildId, prefix);
+    this.wsHandler.guildPrefixUpdate(config);
+    return config;
   }
 
   @Post(':guildId/config/welcome')
