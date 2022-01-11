@@ -1,7 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { IDiscordHttpService } from '../interfaces/discord-http';
 import axios from 'axios';
-import { PartialGuild, PartialGuildChannel } from '../../utils/types';
+import {
+  GuildBanType,
+  PartialGuild,
+  PartialGuildChannel,
+} from '../../utils/types';
 import { DISCORD_BASE_URL } from '../../utils/constants';
 
 @Injectable()
@@ -27,6 +31,18 @@ export class DiscordHttpService implements IDiscordHttpService {
     const TOKEN = process.env.DISCORD_BOT_TOKEN;
     return axios.get<PartialGuildChannel[]>(
       `${DISCORD_BASE_URL}/guilds/${guildId}/channels`,
+      {
+        headers: {
+          Authorization: `Bot ${TOKEN}`,
+        },
+      },
+    );
+  }
+
+  fetchGuildBans(guildId: string) {
+    const TOKEN = process.env.DISCORD_BOT_TOKEN;
+    return axios.get<GuildBanType[]>(
+      `${DISCORD_BASE_URL}/guilds/${guildId}/bans`,
       {
         headers: {
           Authorization: `Bot ${TOKEN}`,

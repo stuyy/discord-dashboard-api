@@ -20,4 +20,10 @@ export class DiscordController {
     const { data } = await this.discordService.getGuildChannels(guildId);
     return data.filter((channel) => channel.type === 0);
   }
+
+  @Get('guilds/:guildId/bans')
+  async getGuildBans(@Param('guildId') guildId: string) {
+    const { data } = await this.discordService.getGuildBans(guildId);
+    return data;
+  }
 }

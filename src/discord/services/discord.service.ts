@@ -32,4 +32,8 @@ export class DiscordService implements IDiscordService {
   getGuildChannels(guildId: string) {
     return this.discordHttpService.fetchGuildChannels(guildId);
   }
+
+  getGuildBans(guildId: string) {
+    return this.discordHttpService.fetchGuildBans(guildId);
+  }
 }
