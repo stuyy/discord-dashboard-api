@@ -12,4 +12,5 @@ export interface IDiscordHttpService {
     guildId: string,
   ): Promise<AxiosResponse<PartialGuildChannel[]>>;
   fetchGuildBans(guildId: string): Promise<AxiosResponse<GuildBanType[]>>;
+  deleteGuildBan(guildId: string, userId: string): Promise<AxiosResponse>;
 }

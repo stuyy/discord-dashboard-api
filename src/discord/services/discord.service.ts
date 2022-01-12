@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { AxiosResponse } from 'axios';
 import { SERVICES } from '../../utils/constants';
 import { IDiscordService } from '../interfaces/discord';
 import { IDiscordHttpService } from '../interfaces/discord-http';
@@ -35,5 +36,9 @@ export class DiscordService implements IDiscordService {
 
   getGuildBans(guildId: string) {
     return this.discordHttpService.fetchGuildBans(guildId);
+  }
+
+  deleteGuildBan(guildId: string, userId: string): Promise<AxiosResponse> {
+    return this.discordHttpService.deleteGuildBan(guildId, userId);
   }
 }

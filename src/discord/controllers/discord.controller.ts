@@ -1,4 +1,4 @@
-import { Controller, Get, Inject, Param } from '@nestjs/common';
+import { Controller, Delete, Get, Inject, Param } from '@nestjs/common';
 import { ROUTES, SERVICES } from '../../utils/constants';
 import { AuthUser } from '../../utils/decorators';
 import { User } from '../../utils/typeorm/entities/User';
@@ -24,6 +24,15 @@ export class DiscordController {
   @Get('guilds/:guildId/bans')
   async getGuildBans(@Param('guildId') guildId: string) {
     const { data } = await this.discordService.getGuildBans(guildId);
+    return data;
+  }
+
+  @Delete('guilds/:guildId/bans/:userId')
+  async deleteGuildBan(
+    @Param('guildId') guildId: string,
+    @Param('userId') userId: string,
+  ) {
+    const { data } = await this.discordService.deleteGuildBan(guildId, userId);
     return data;
   }
 }
