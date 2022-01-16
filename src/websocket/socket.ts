@@ -20,4 +20,16 @@ export class WebsocketHandler {
   guildPrefixUpdate(config: GuildConfiguration) {
     this.ws.emit('guildPrefixUpdate', config);
   }
+
+  @SubscribeMessage('guildBanAdd')
+  guildBanAddHandler(@MessageBody() data: any) {
+    console.log('Guild Ban Add...');
+    console.log(data);
+  }
+
+  @SubscribeMessage('guildBanRemove')
+  guildBanRemoveHandler(@MessageBody() data: any) {
+    console.log('Guild Ban Remove...');
+    console.log(data);
+  }
 }
